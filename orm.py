@@ -1,2 +1,0 @@
-o = "asdf"
-print(o)
