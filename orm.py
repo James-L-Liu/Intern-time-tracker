@@ -1,0 +1,2 @@
+o = "asdf"
+print(o)
