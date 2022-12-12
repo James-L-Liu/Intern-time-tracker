@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock %}
+
+{% block body %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+<div class="container" style="background: grey">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+                <h2>Manage <b>Employees </b> <button type="button" class="btn btn-info btn-lg"
+                style="float: right" data-bs-toggle="modal" data-bs-target="#adduserModal"> Add new user </button></h2>
+
+                <div id="adduserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="user-name" class="col-form-label">Username: </label>
+                            <input type="text" class="form-control" id="user-name">
+                          </div>
+                          <div class="form-group">
+                            <label for="email" class="col-form-label">Email: </label>
+                            <input type="text" class="form-control" id="email">
+                          </div>
+                            <div class="form-group">
+                            <label for="password" class="col-form-label">Password: </label>
+                            <input type="password" class="form-control" id="password">
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick=""> Confirm </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+
+                {% for user in all_users %}
+                <table class="table table-hover table-dark">
+                    <tr>
+                        <th> ID </th>
+                        <th> Name </th>
+                        <th> email </th>
+                        <th> age </th>
+                        <th> action </th>
+                    </tr>
+
+                    <tr>
+                        <td>{{user.ID}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.age}}</td>
+                        <td>
+                            <a href="" class="btn btn-warning btn-xs"> Edit </a>
+                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this user?')">
+                                Delete </a>
+                        </td>
+                    </tr>
+                </table>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
