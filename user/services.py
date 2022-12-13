@@ -1,16 +1,15 @@
-import music.adapters.repository as repo
-import music.adapters.services as services
+import adapters.repository as repo
+import adapters.services as services
+from domainmodel.user import User
 
-def extract_track_by_album(album_id):
-    tracks_by_album, album_selected = [], None
-    tracks = services.get_tracks(repo.repo_instance)
-    for track in tracks:
-        if track.album is not None:
-            if track.album.album_id == album_id:
-                tracks_by_album.append(track)
-                album_selected = track.album.title
-    return tracks_by_album, album_selected
+def get_all_users():
+    return services.get_all_users(repo.repo_instance)
 
+def get_user(user_id):
+    return services.get_user(repo.repo_instance, user_id)
 
-def get_all_albums():
-    return services.get_albums(repo.repo_instance)
+def add_user(name, email, age, passowrd):
+    services.add_user(repo.repo_instance, name, email, age, passowrd)
+
+def delete_user(user: User):
+    services.delete_user(user)

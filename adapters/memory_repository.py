@@ -12,12 +12,7 @@ from domainmodel.Admin import Admin
 from domainmodel.Project import Project
 from domainmodel.Task import Task
 
-
-
-
-
 class MemoryRepository():
-
     def __init__(self):
         self.__users = list[User]()
         self.__projects = list[Project]()
@@ -27,15 +22,20 @@ class MemoryRepository():
     def add_user(self, user: User):
         self.__users.append(user)
 
-    def get_user(self, user_name, user_id) -> User:
+    def get_user(self, user_id) -> User:
         user = None
         for u in self.__users:
-            if u.name == user_name.lower().strip() and u.ID == user_id:
+            if u.ID == user_id:
                 user = u
         return user
 
     def get_all_users(self) -> list[User]:
         return self.__users
+
+    def delete_user(self, user: User):
+        for element in self.__users:
+            if element is user:
+                self.__users.remove(element)
 
     def add_task(self, task: Task):
         self.__tasks.append(task)

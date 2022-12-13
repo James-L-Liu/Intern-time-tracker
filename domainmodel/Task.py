@@ -1,11 +1,11 @@
-from user_project_interface import People
-from work_interface import Work
+from domainmodel.user_project_interface import People
+from domainmodel.work_interface import Work
 
 class Task():
     id_number = 0
-    def __init__(self, name):
+    def __init__(self, name: str, description: str = None):
         self.__name: str = name
-        self.__description: str or None = None
+        self.__description: str or None = description
         self.__user: People or None = None
         self.__project: Work or None = None
         self.__is_done: bool = False
@@ -13,7 +13,8 @@ class Task():
         self.__ID = Task.id_number
         Task.id_number += 1
 
-    def ID(self):
+    @property
+    def ID(self) -> str:
         string_ID = str(self.__ID)
         if len(string_ID) == 1:
             return "TK#0000" + string_ID
@@ -84,11 +85,11 @@ class Task():
     @project.setter
     def project(self, proj):
         self.__project = None
-        if isinstance(proj, Work) and proj.ID[:3] == 'Prj':
+        if isinstance(proj, Work) and proj.ID[: 3] == 'Prj':
             self.__project = proj
 
     def __repr__(self):
-        return f"---Project {self.name}, ID_number = {self.ID}--"
+        return f"<Task {self.name}>"
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):

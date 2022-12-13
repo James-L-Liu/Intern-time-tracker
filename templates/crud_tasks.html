@@ -7,45 +7,37 @@
 
 <br>
 </br>
-<div class="container" style="background: #FBFB7E">
+<div class="container" style="background: #C2F8D8">
     <div class="row">
         <div class="col md-12">
             <div class="jumbotron p-3">
-                <h2>Manage <b>Employees </b> <button type="button" class="btn btn-info btn-lg"
-                style="float: right" data-bs-toggle="modal" data-bs-target="#adduserModal"> Add new user </button></h2>
+                <h2>Manage <b>Tasks </b> <button type="button" class="btn btn-info btn-lg"
+                style="float: right" data-bs-toggle="modal" data-bs-target="#addtaskModal"> Add new task </button></h2>
 
-                <div id="adduserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div id="addtaskModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">New Task</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div class="modal-body">
-                        <form action="{{url_for('user_bp.add_user')}}" method="POST" id="add_user_form">
+                        <form action="{{url_for('task_bp.add_task')}}" method="POST" id="add_task_form">
                           <div class="form-group">
-                            <label for="user-name" class="col-form-label">Username: </label>
-                            <input type="text" class="form-control" id="user-name" name="username">
-                          </div>
-                          <div class="form-group">
-                            <label for="email" class="col-form-label">Email: </label>
-                            <input type="text" class="form-control" id="email" name="email">
+                            <label for="user-name" class="col-form-label">Name: </label>
+                            <input type="text" class="form-control" id="user-name" name="name">
                           </div>
                             <div class="form-group">
-                            <label for="age" class="col-form-label">Age: </label>
-                            <input type="number" class="form-control" id="age" name="age">
-                          </div>
-                            <div class="form-group">
-                            <label for="password" class="col-form-label">Password: </label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <label for="description" class="col-form-label">Description: </label>
+                            <input type="text" class="form-control" id="description" name="description">
                           </div>
                         </form>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" value="Submit" form="add_user_form"> Confirm </button>
+                        <button type="submit" class="btn btn-primary" value="Submit" form="add_task_form"> Confirm </button>
                       </div>
                     </div>
                   </div>
@@ -57,19 +49,19 @@
                     <tr>
                         <th> ID </th>
                         <th> Name </th>
-                        <th> email </th>
-                        <th> age </th>
+                        <th style="width: 33%"> Description </th>
+                        <th> Status </th>
                         <th> action </th>
                     </tr>
-                    {% for user in all_users %}
+                    {% for task in all_tasks %}
                     <tr>
-                        <td>{{user.ID}}</td>
-                        <td>{{user.name}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.age}}</td>
+                        <td>{{task.ID}}</td>
+                        <td>{{task.name}}</td>
+                        <td>{{task.description}}</td>
+                        <td>{{task.status}}</td>
                         <td>
                             <a href="" class="btn btn-warning btn-xs"> Edit </a>
-                            <a href="{{url_for('user_bp.delete_user, user_id=user.ID')}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this user?')">
+                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this task?')">
                                 Delete </a>
                         </td>
                     </tr>

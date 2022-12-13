@@ -1,15 +1,16 @@
-from Admin import Admin
-from Task import Task
-from Project import Project
+from domainmodel.Admin import Admin
+from domainmodel.Task import Task
+from domainmodel.Project import Project
 from domainmodel.user_project_interface import People
 
 class User(People):
     ID_number = 0
-    def __init__(self, name: str, email: str, age: int, admin: Admin or None = None):
+    def __init__(self, name: str, email: str, age: int, password: str, admin: Admin or None = None):
         self.__name = name
         self.__email = email
         self.__age = age
         self.__admin = admin
+        self.__password = password
         self.__project: Project or None = None
         self.__list_of_tasks = list[Task]()
         self.__tasks_done = list[Task]()
@@ -46,6 +47,15 @@ class User(People):
     def age(self, new_age: int):
         if type(new_age) is int and new_age > 0:
             self.__age = new_age
+
+    @property
+    def password(self) -> str:
+        return self.__password
+
+    @age.setter
+    def password(self, new_password: str):
+        if isinstance(new_password, str):
+            self.__password = new_password
 
     @property
     def admin(self) -> Admin:
@@ -152,27 +162,3 @@ class User(People):
         return hash(self.ID)
 
 
-
-def main():
-    u = User('James Liu', 'jaksljd@1341.com', 22)
-    u2 = User('James Liu', 'jaksljd@1341.com', 22)
-    ue = User('James Liu', 'jaksljd@1341.com', 22)
-    u4 = User('James Liu', 'jaksljd@1341.com', 22)
-    u41 = User('James Liu', 'jaksljd@1341.com', 22)
-    u11 = User('James Liu', 'jaksljd@1341.com', 22)
-    u4r = User('James Liu', 'jaksljd@1341.com', 22)
-    p1 = Project('First')
-    p2 = Project('sec')
-    p3 = Project('third')
-
-    p1.add_user(u)
-    p1.add_user(u4r)
-    print(p1.ID)
-    print(p2.ID)
-    print(p3.ID)
-    print(p1.get_all_users)
-    p1.add_user(u41)
-    print(p1.get_all_users)
-
-
-main()

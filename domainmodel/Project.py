@@ -1,7 +1,7 @@
 
-import Task
+from domainmodel.Task import Task
 from domainmodel.user_project_interface import People
-from work_interface import Work
+from domainmodel.work_interface import Work
 
 class Project(Work):
     id_number = 0
@@ -81,8 +81,8 @@ class Project(Work):
     def get_all_tasks(self):
         return self.__users
 
-    def add_task(self, new_task: Task.Task):
-        if isinstance(new_task, Task.Task):
+    def add_task(self, new_task: Task):
+        if isinstance(new_task, Task):
             self.__tasks.append(new_task)
 
     def remove_task(self, task_remove):

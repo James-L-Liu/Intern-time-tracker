@@ -1,6 +1,6 @@
 from domainmodel.user_project_interface import People
-from Task import Task
-from Project import Project
+from domainmodel.Task import Task
+from domainmodel.Project import Project
 
 
 class Admin(People):
@@ -104,17 +104,4 @@ class Admin(People):
         return hash(self.ID)
 
 
-def main():
-    p1 = Project('001')
-    p3 = Project('003')
-    p4 = Project('004')
-    admin = Admin("James Liu", "fashdfjk34", 22)
-    admin.take_project(p1)
-    admin.take_project(p3)
-    admin.take_project(p4)
-    admin.create_project("new_project")
-    print(admin.list_of_projects)
-    admin.delete_project(p1)
-    print(p1.admin)
 
-main()
