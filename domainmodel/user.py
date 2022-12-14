@@ -45,7 +45,7 @@ class User(People):
 
     @age.setter
     def age(self, new_age: int):
-        if type(new_age) is int and new_age > 0:
+        if isinstance(new_age, int) and new_age > 0:
             self.__age = new_age
 
     @property
@@ -71,15 +71,15 @@ class User(People):
     def ID(self) -> str:
         string_ID = str(self.__ID)
         if len(string_ID) == 1:
-            return "JK#0000" + string_ID
+            return "JK0000" + string_ID
         elif len(string_ID) == 2:
-            return "JK#000" + string_ID
+            return "JK000" + string_ID
         elif len(string_ID) == 3:
-            return "JK#00" + string_ID
+            return "JK00" + string_ID
         elif len(string_ID) == 4:
-            return "JK#0" + string_ID
+            return "JK0" + string_ID
         else:
-            return "JK#" + string_ID
+            return "JK" + string_ID
 
     @property
     def project(self) -> Project:

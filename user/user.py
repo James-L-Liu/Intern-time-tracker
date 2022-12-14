@@ -15,14 +15,35 @@ def add_user():
         email = request.form['email']
         age = request.form['age']
         password = request.form['password']
-
         utilities.add_user(name, email, age, password)
-    all_users = utilities.get_all_users()
-    return redirect(url_for('user_bp.get_all_users',all_users=all_users))
 
-@user_blueprint.route('/users/delete', methods=['GET', 'POST'])
+    #return render_template('crud_users.html', all_users=all_users)
+    return redirect(url_for('user_bp.get_all_users'))
+
+@user_blueprint.route('/users/delete/<user_id>', methods=['GET', 'POST'])
 def delete_user(user_id):
+    print(user_id)
     user = utilities.get_user(user_id)
     utilities.delete_user(user)
-    all_users = utilities.get_all_users()
-    return redirect(url_for('user_bp.get_all_users', all_users=all_users))
+    #return render_template('crud_users.html', all_users=all_users) // alternative solution by using slash/ path in the url
+    return redirect(url_for('user_bp.get_all_users'))
+
+@user_blueprint.route('/update/<user_id>', methods=['GET', 'POST'])
+def update_user(user_id):
+    print(user_id)
+    if request.method == 'POST':
+        user_number = request.form.get('user_id')
+        user_name = request.form.get('user_name')
+
+        print(user_number)
+        print(user_name)
+        print(331)
+        user = utilities.get_user(user_number)
+        print(user)
+        user.name = request.form['update_username']
+        user.email = request.form['update_email']
+        print(request.form['update_age'])
+        user.age = int(request.form['update_age'])
+        user.password = request.form['update_password']
+
+    return redirect(url_for('user_bp.get_all_users'))

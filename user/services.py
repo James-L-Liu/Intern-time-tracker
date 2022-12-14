@@ -12,4 +12,4 @@ def add_user(name, email, age, passowrd):
     services.add_user(repo.repo_instance, name, email, age, passowrd)
 
 def delete_user(user: User):
-    services.delete_user(user)
+    services.delete_user(repo.repo_instance, user)

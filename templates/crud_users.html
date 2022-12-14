@@ -18,7 +18,7 @@
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+                        <h5 class="modal-title">New User</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -68,11 +68,56 @@
                         <td>{{user.email}}</td>
                         <td>{{user.age}}</td>
                         <td>
-                            <a href="" class="btn btn-warning btn-xs"> Edit </a>
-                            <a href="{{url_for('user_bp.delete_user, user_id=user.ID')}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this user?')">
+
+                            <button class="btn btn-warning btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#modalEdit{{user.ID}}" > Edit{{user.ID}} </button>
+
+                            <a href="{{ url_for('user_bp.delete_user', user_id=user.ID) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this user?')">
                                 Delete </a>
                         </td>
                     </tr>
+
+
+                    <div id="modalEdit{{user.ID}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" style="color: black">Update User{{user.ID}}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/update/{{user.ID}}" method="POST" id="update_user_form{{user.ID}}">
+                          <div class="form-group">
+                            <label for="update_username" class="col-form-label" style="color: black">Username{{user.ID}} {{user.name}}: </label>
+                              <input type="hidden" name="user_id" value="{{user.ID}}">
+                              <input type="hidden" name="user_name" value="{{user.name}}">
+                            <input type="text" class="form-control" id="update_username" name="update_username">
+                          </div>
+                          <div class="form-group">
+                            <label for="update_email" class="col-form-label" style="color: black">Email: </label>
+                            <input type="text" class="form-control" id="update_email" name="update_email">
+                          </div>
+                            <div class="form-group">
+                            <label for="update_age" class="col-form-label" style="color: black">Age: </label>
+                            <input type="number" class="form-control" id="update_age" name="update_age">
+                          </div>
+                            <div class="form-group">
+                            <label for="update_password" class="col-form-label" style="color: black">Password: </label>
+                            <input type="password" class="form-control" id="update_password" name="update_password">
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" value="Submit" form="update_user_form{{user.ID}}"> Update </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                    <script src="static/js/myown.js"></script>
                     {% endfor %}
                 </table>
 
