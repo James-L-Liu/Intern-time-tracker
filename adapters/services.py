@@ -19,3 +19,9 @@ def get_all_tasks(repo: AbstractRepository):
 
 def add_task(repo: AbstractRepository, name, description):
     repo.add_task(Task(name, description))
+
+def get_task(repo: AbstractRepository, task_id):
+    return repo.get_task(task_id)
+
+def delete_task(repo: AbstractRepository, task: Task):
+    repo.delete_task(task)

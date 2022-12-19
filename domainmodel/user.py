@@ -52,7 +52,7 @@ class User(People):
     def password(self) -> str:
         return self.__password
 
-    @age.setter
+    @password.setter
     def password(self, new_password: str):
         if isinstance(new_password, str):
             self.__password = new_password

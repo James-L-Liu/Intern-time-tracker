@@ -20,13 +20,17 @@
                                 <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Project</span> </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Task</span> </a>
+                                <a href="{{ url_for('task_bp.get_all_tasks') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">Task</span> </a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="{{ url_for('user_bp.get_all_users') }}" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Users</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('authentication_bp.login') }}" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Login</span></a>
                     </li>
 
 
@@ -93,58 +97,6 @@
         </div>
     </div>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

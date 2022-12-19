@@ -24,15 +24,15 @@ class Project(Work):
     def ID(self):
         string_ID = str(self.__ID)
         if len(string_ID) == 1:
-            return "Prj#0000" + string_ID
+            return "Prj0000" + string_ID
         elif len(string_ID) == 2:
-            return "Prj#000" + string_ID
+            return "Prj000" + string_ID
         elif len(string_ID) == 3:
-            return "Prj#00" + string_ID
+            return "Prj00" + string_ID
         elif len(string_ID) == 4:
-            return "Prj#0" + string_ID
+            return "Prj0" + string_ID
         else:
-            return "Prj#" + string_ID
+            return "Prj" + string_ID
 
     @property
     def name(self):

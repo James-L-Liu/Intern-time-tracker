@@ -49,7 +49,7 @@
                     <tr>
                         <th> ID </th>
                         <th> Name </th>
-                        <th style="width: 33%"> Description </th>
+                        <th style="width: 35%;"> Description </th>
                         <th> Status </th>
                         <th> action </th>
                     </tr>
@@ -57,14 +57,58 @@
                     <tr>
                         <td>{{task.ID}}</td>
                         <td>{{task.name}}</td>
-                        <td>{{task.description}}</td>
+                        <td style="width: 35%"> <div style="width:100%; max-height:85px; overflow:auto">{{task.description}}</div></td>
                         <td>{{task.status}}</td>
                         <td>
-                            <a href="" class="btn btn-warning btn-xs"> Edit </a>
-                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this task?')">
+                            <button class="btn btn-warning btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#modalEdit{{task.ID}}" > Edit </button>
+                            <a href="{{ url_for('task_bp.delete_task', task_id=task.ID) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this task?')">
                                 Delete </a>
                         </td>
                     </tr>
+
+                    <div id="modalEdit{{task.ID}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" style="color: black">Update Task{{task.ID}}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/update" method="POST" id="update_task_form{{task.ID}}">
+                          <div class="form-group">
+                            <label for="update_taskname" class="col-form-label" style="color: black">Taskname{{task.ID}} {{task.name}}: </label>
+                              <input type="hidden" name="task_id" value="{{task.ID}}">
+                              <input type="hidden" name="task_name" value="{{task.name}}">
+                            <input type="text" class="form-control" id="update_taskname" name="update_taskname" value="{{task.name}}">
+                          </div>
+
+                          <div class="form-group">
+                              <br>
+                              <label for="update_description" class="col-form-label" style="color: green"> Description </label>
+                              <textarea rows="3" cols="88" class="form-control" id="update_description" name="update_description"> {{task.description}} </textarea>
+                          </div>
+
+                          <div class="form-group">
+                              <br>
+                              <span>Status</span>
+                              <span style="float: right">
+                              <input type="radio" id="done" name="update_status" value="done">
+                              <label for="done"> Done &nbsp;&nbsp;</label>
+                              <input type="radio" id="undone" name="update_status" value="undone" checked="checked">
+                                  <label for="done"> Undone </label><br> </span>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" value="Submit" form="update_task_form{{task.ID}}"> Update </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
                     {% endfor %}
                 </table>
 
@@ -76,3 +120,51 @@
 </div>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

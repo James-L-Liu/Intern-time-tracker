@@ -44,6 +44,10 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def delete_task(self, task: Task):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def add_project(self, project: Project):
         raise NotImplementedError
 

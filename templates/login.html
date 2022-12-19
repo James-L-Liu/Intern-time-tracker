@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block title %} Login {% endblock %}
+
+{% block base_content %}
+<link href="{{url_for('static', filename = 'style.css')}}" rel="stylesheet">
+
+<div class="container">
+<main>
+    <span class="formwrapper">
+        <h3 style="color: white; margin-left: 16%;">Please login here</h3>
+        <br>
+        <form method="POST" action={{handler_url}}>
+             {{ form.csrf_token }} <!-- Need to include this token - Flask WTForms requires it. -->
+
+            <div class="form-field"><div style="color: white">{{ form.username.label }}</div>{{ form.username }}
+                 <a href="#" style="color: blue; margin-left: 10%"> Forgot your password? </a>
+                {% if form.username.errors or user_name_error_message is not none %}
+                    <ul class="errors">
+                        {% if user_name_error_message is not none %}
+                            <li>
+                                {{ user_name_error_message }}
+                            </li>
+                        {% endif %}
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <br>
+
+            <div class="form-field"><div style="color: white">{{ form.password.label }}</div> {{ form.password }}
+                <span style="color: green; margin-left: 13%;"> {{ form.remember_btn }} {{ form.remember_btn.label }}</span>
+                {% if form.password.errors or password_error_message is not none %}
+                    <ul class="errors">
+                        {% if password_error_message is not none %}
+                            <li>
+                                {{ password_error_message }}
+                            </li>
+                        {% endif %}
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+
+            <br>
+            {{ form.submit }}
+        </form>
+        <h5 style="color: white"> Do not have an account yet? <a href="/authentication/register">  Click me to create an account ! </a> </h5>
+    </span>
+
+</main>
+</div>
+{% endblock %}

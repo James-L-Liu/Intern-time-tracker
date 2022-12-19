@@ -53,15 +53,15 @@ class Admin(People):
     def ID(self) -> str:
         string_ID = str(self.__ID)
         if len(string_ID) == 1:
-            return "AD#0000" + string_ID
+            return "AD0000" + string_ID
         elif len(string_ID) == 2:
-            return "AD#000" + string_ID
+            return "AD000" + string_ID
         elif len(string_ID) == 3:
-            return "AD#00" + string_ID
+            return "AD00" + string_ID
         elif len(string_ID) == 4:
-            return "AD#0" + string_ID
+            return "AD0" + string_ID
         else:
-            return "AD#" + string_ID
+            return "AD" + string_ID
 
     def create_project(self, name: str):
         new_proj = Project(name)

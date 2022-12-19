@@ -17,15 +17,15 @@ class Task():
     def ID(self) -> str:
         string_ID = str(self.__ID)
         if len(string_ID) == 1:
-            return "TK#0000" + string_ID
+            return "TK0000" + string_ID
         elif len(string_ID) == 2:
-            return "TK#000" + string_ID
+            return "TK000" + string_ID
         elif len(string_ID) == 3:
-            return "TK#00" + string_ID
+            return "TK00" + string_ID
         elif len(string_ID) == 4:
-            return "TK#0" + string_ID
+            return "TK0" + string_ID
         else:
-            return "TK#" + string_ID
+            return "TK" + string_ID
 
     @property
     def name(self):

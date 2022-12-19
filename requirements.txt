@@ -5,3 +5,5 @@ better-profanity==0.7.0
 flask-wtf==0.15.0
 password-validator==1.0
 SQLAlchemy==1.4.41
+Werkzeug~=2.2.2
+WTForms~=3.0.1

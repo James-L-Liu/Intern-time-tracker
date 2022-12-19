@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% block title %} Register {% endblock %}
+
+{% block base_content %}
+<link href="{{url_for('static', filename = 'style.css')}}" rel="stylesheet">
+
+<div class="container">
+<main>
+    <span class="formwrapper">
+        <h3 style="color: white; margin-left: 14%;">Please Register here</h3>
+        <br>
+        <form method="POST" action={{handler_url}}>
+             {{ form.csrf_token }} <!-- Need to include this token - Flask WTForms requires it. -->
+
+            <div class="form-field"><div style="color: white">{{ form.username.label }}</div>{{ form.username }}
+                {% if form.username.errors or user_name_error_message is not none %}
+                    <ul class="errors">
+                        {% if user_name_error_message is not none %}
+                            <li>
+                                {{ user_name_error_message }}
+                            </li>
+                        {% endif %}
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <br>
+
+            <div class="form-field"><div style="color: white">{{ form.email.label }}</div> {{ form.email }}
+                {% if form.email.errors or email_error_message is not none %}
+                    <ul class="errors">
+                        {% if email_error_message is not none %}
+                            <li>
+                                {{ email_error_message }}
+                            </li>
+                        {% endif %}
+                        {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <br>
+            <br>
+
+            <div class="form-field"><div style="color: white">{{ form.age.label }}</div> {{ form.age }}
+                {% if form.age.errors or age_error_message is not none %}
+                    <ul class="errors">
+                        {% if age_error_message is not none %}
+                            <li>
+                                {{ age_error_message }}
+                            </li>
+                        {% endif %}
+                        {% for error in form.age.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <br>
+
+            <div class="form-field"><div style="color: white">{{ form.password.label }}</div> {{ form.password }}
+                {% if form.password.errors or password_error_message is not none %}
+                    <ul class="errors">
+                        {% if password_error_message is not none %}
+                            <li>
+                                {{ password_error_message }}
+                            </li>
+                        {% endif %}
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <br>
+            {{ form.submit }}
+        </form>
+        <h5 style="color: white"> Already had an account? <a href="#">  Click me to login ! </a> </h5>
+    </span>
+
+</main>
+</div>
+{% endblock %}

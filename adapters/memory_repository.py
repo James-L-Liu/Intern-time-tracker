@@ -50,6 +50,11 @@ class MemoryRepository():
     def get_all_tasks(self) -> list[Task]:
         return self.__tasks
 
+    def delete_task(self, task: Task):
+        for element in self.__tasks:
+            if element is task:
+                self.__tasks.remove(element)
+
     def add_project(self, project: Project):
         self.__projects.append(project)
 
