@@ -13,7 +13,7 @@
 
             <div class="form-field"><div style="color: white">{{ form.username.label }}</div>{{ form.username }}
                 {% if form.username.errors or user_name_error_message is not none %}
-                    <ul class="errors">
+                    <ul class="errors" style="color: red">
                         {% if user_name_error_message is not none %}
                             <li>
                                 {{ user_name_error_message }}
@@ -30,7 +30,7 @@
 
             <div class="form-field"><div style="color: white">{{ form.email.label }}</div> {{ form.email }}
                 {% if form.email.errors or email_error_message is not none %}
-                    <ul class="errors">
+                    <ul class="errors" style="color: red">
                         {% if email_error_message is not none %}
                             <li>
                                 {{ email_error_message }}
@@ -47,25 +47,13 @@
             <br>
 
             <div class="form-field"><div style="color: white">{{ form.age.label }}</div> {{ form.age }}
-                {% if form.age.errors or age_error_message is not none %}
-                    <ul class="errors">
-                        {% if age_error_message is not none %}
-                            <li>
-                                {{ age_error_message }}
-                            </li>
-                        {% endif %}
-                        {% for error in form.age.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
             </div>
 
             <br>
 
             <div class="form-field"><div style="color: white">{{ form.password.label }}</div> {{ form.password }}
                 {% if form.password.errors or password_error_message is not none %}
-                    <ul class="errors">
+                    <ul class="errors" style="color: red">
                         {% if password_error_message is not none %}
                             <li>
                                 {{ password_error_message }}

@@ -1,0 +1,27 @@
+<center><body>
+
+<h3 id= "countup">00:00:00</h3>
+
+<button id="stoptimer" onclick="clearInterval(timer)">Stop Timer</button>
+
+</body></center>
+
+<script>
+    var seconds = 0
+
+    var timer = setInterval(upTimer, 1000);
+
+    function upTimer() {
+
+    ++seconds;
+
+    var hour = Math.floor(seconds / 3600);
+
+    var minute = Math.floor((seconds - hour * 3600) / 60);
+
+    var updSecond = seconds - (hour * 3600 + minute * 60);
+
+    document.getElementById("countup").innerHTML = hour + ":" + minute + ":" + updSecond;
+
+}
+</script>

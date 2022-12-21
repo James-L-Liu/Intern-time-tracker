@@ -13,7 +13,19 @@
             <div class="jumbotron p-3">
                 <h2>Manage <b>Employees </b> <button type="button" class="btn btn-info btn-lg"
                 style="float: right" data-bs-toggle="modal" data-bs-target="#adduserModal"> Add new user </button></h2>
+                <br>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-info" role="alert" >{{ message }}
+                    <button type="button" data-bs-dismiss="alert" style="float:right">
+                        &times
+                    </button>
+                </div>
 
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
                 <div id="adduserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -27,19 +39,19 @@
                         <form action="{{url_for('user_bp.add_user')}}" method="POST" id="add_user_form">
                           <div class="form-group">
                             <label for="user-name" class="col-form-label">Username: </label>
-                            <input type="text" class="form-control" id="user-name" name="username">
+                            <input type="text" class="form-control" id="user-name" name="username" required>
                           </div>
                           <div class="form-group">
                             <label for="email" class="col-form-label">Email: </label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" required>
                           </div>
                             <div class="form-group">
                             <label for="age" class="col-form-label">Age: </label>
-                            <input type="number" class="form-control" id="age" name="age">
+                            <input type="number" class="form-control" id="age" name="age" min="1" max="100">
                           </div>
                             <div class="form-group">
                             <label for="password" class="col-form-label">Password: </label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control" id="password" name="password" required>
                           </div>
                         </form>
                       </div>
@@ -51,7 +63,6 @@
                   </div>
                 </div>
                 <br>
-
 
                 <table class="table table-hover table-dark">
                     <tr>
@@ -75,7 +86,6 @@
                                 Delete </a>
                         </td>
                     </tr>
-
 
                     <div id="modalEdit{{user.ID}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">

@@ -5,8 +5,8 @@ from domainmodel.Task import Task
 def get_all_tasks():
     return services.get_all_tasks(repo.repo_instance)
 
-def add_task(name, description):
-    services.add_task(repo.repo_instance, name, description)
+def add_task(name, description, time):
+    services.add_task(repo.repo_instance, name, description, time)
 
 def get_task(task_id):
     return services.get_task(repo.repo_instance, task_id)

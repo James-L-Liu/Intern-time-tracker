@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, session, reques
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, EmailField
-from wtforms.validators import DataRequired, Length, Email, ValidationError
+from wtforms.validators import DataRequired, Length, Email, ValidationError, InputRequired, Optional
 from wtforms import validators
 
 from password_validator import PasswordValidator
@@ -21,7 +21,6 @@ def register():
     user_name_not_unique = None
 
     if request.method == 'POST' and form.validate_on_submit():
-        print(555)
         try:
             services.add_user(form.username.data, form.email.data, form.age.data, form.password.data, repo.repo_instance)
             # All is well, redirect the user to the login page.
@@ -29,12 +28,10 @@ def register():
         except services.NameNotUniqueException:
             user_name_not_unique = 'Your user name is already taken - please supply another'
 
-    else:
-        print(129837123)
-
     return render_template('register.html',
-                           password_error_message=user_name_not_unique,
-                           email_error_message=user_name_not_unique,
+                           user_name_error_message=user_name_not_unique,
+                           email_error_message=None,
+                           password_error_message=None,
                            form=form)
 
 @authentication_blueprint.route('/login', methods=['GET', 'POST'])
@@ -69,16 +66,17 @@ class PasswordValid:
 
 class RegistrationForm(FlaskForm):
     username = StringField('Name', validators=[
-        DataRequired(message='Your user name is required'),
+        InputRequired(message='Your user name is required'),
         Length(min=3, max=30, message='Your user name is too short')])
     email = EmailField('Email', validators=[
-        DataRequired(message='Your email is required')
+        InputRequired(message='Your email is required')
     ])
     age = IntegerField('Age', validators=[
+        Optional(),
         validators.number_range(min=1, max=100)
     ])
     password = PasswordField('Password', validators=[
-        DataRequired(message='Your password is required'),
+        InputRequired(message='Your password is required'),
         Length(min=8, message='Your password is too short'),
         PasswordValid()])
     submit = SubmitField('Register')
@@ -86,8 +84,8 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[
-        DataRequired(message='Your username is needed'), Length(min=3, max=30)])
+        InputRequired(message='Your username is needed'), Length(min=3, max=30)])
     password = PasswordField('Password', validators=[
-        DataRequired(message='Your password is needed'), Length(min=8, max=50)])
+        InputRequired(message='Your password is needed'), Length(min=8, max=50)])
     remember_btn = BooleanField('Remember me?')
     submit = SubmitField('Login')

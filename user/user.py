@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, request, redirect
+from flask import Blueprint, render_template, url_for, request, redirect, flash
 import user.services as utilities
 
 user_blueprint = Blueprint('user_bp', __name__)
@@ -17,6 +17,7 @@ def add_user():
         password = request.form['password']
         utilities.add_user(name, email, age, password)
 
+        flash('User has been inserted successfully !')
     #return render_template('crud_users.html', all_users=all_users)
     return redirect(url_for('user_bp.get_all_users'))
 
@@ -25,6 +26,7 @@ def delete_user(user_id):
     print(user_id)
     user = utilities.get_user(user_id)
     utilities.delete_user(user)
+    flash('User has been deleted successfully !')
     #return render_template('crud_users.html', all_users=all_users) // alternative solution by using slash/ path in the url
     return redirect(url_for('user_bp.get_all_users'))
 
@@ -45,5 +47,6 @@ def update_user(user_id):
         print(request.form['update_age'])
         user.age = int(request.form['update_age'])
         user.password = request.form['update_password']
+        flash('User has been updated successfully !')
 
     return redirect(url_for('user_bp.get_all_users'))

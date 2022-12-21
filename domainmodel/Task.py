@@ -11,6 +11,7 @@ class Task():
         self.__is_done: bool = False
         self.__status: str = 'undone'
         self.__ID = Task.id_number
+        self.__time = 0
         Task.id_number += 1
 
     @property
@@ -87,6 +88,15 @@ class Task():
         self.__project = None
         if isinstance(proj, Work) and proj.ID[: 3] == 'Prj':
             self.__project = proj
+
+    @property
+    def time(self):
+        return self.__time
+
+    @time.setter
+    def time(self, new_time: int):
+        if isinstance(new_time, int):
+            self.__time = new_time
 
     def __repr__(self):
         return f"<Task {self.name}>"

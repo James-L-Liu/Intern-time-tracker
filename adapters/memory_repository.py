@@ -29,6 +29,13 @@ class MemoryRepository():
                 user = u
         return user
 
+    def get_user_by_name(self, username: str):
+        user = None
+        for u in self.__users:
+            if u.name.strip() == username.strip():
+                user = u
+        return user
+
     def get_all_users(self) -> list[User]:
         return self.__users
 

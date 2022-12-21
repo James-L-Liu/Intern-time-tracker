@@ -6,7 +6,7 @@ from domainmodel.user_project_interface import People
 class User(People):
     ID_number = 0
     def __init__(self, name: str, email: str, age: int, password: str, admin: Admin or None = None):
-        self.__name = name
+        self.__name = name.strip()
         self.__email = email
         self.__age = age
         self.__admin = admin

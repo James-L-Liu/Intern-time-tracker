@@ -17,8 +17,10 @@ def delete_user(repo: AbstractRepository, user: User):
 def get_all_tasks(repo: AbstractRepository):
     return repo.get_all_tasks()
 
-def add_task(repo: AbstractRepository, name, description):
-    repo.add_task(Task(name, description))
+def add_task(repo: AbstractRepository, name, description, time):
+    task = Task(name, description)
+    task.time = int(time)
+    repo.add_task(task)
 
 def get_task(repo: AbstractRepository, task_id):
     return repo.get_task(task_id)

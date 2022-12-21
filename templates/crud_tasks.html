@@ -14,6 +14,18 @@
                 <h2>Manage <b>Tasks </b> <button type="button" class="btn btn-info btn-lg"
                 style="float: right" data-bs-toggle="modal" data-bs-target="#addtaskModal"> Add new task </button></h2>
 
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-info" role="alert" >{{ message }}
+                    <button type="button" data-bs-dismiss="alert" style="float:right">
+                        &times
+                    </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
                 <div id="addtaskModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -33,6 +45,7 @@
                             <label for="description" class="col-form-label">Description: </label>
                             <input type="text" class="form-control" id="description" name="description">
                           </div>
+                            <input type="hidden" name="time" value="{{0}}">
                         </form>
                       </div>
                       <div class="modal-footer">
@@ -50,6 +63,7 @@
                         <th> ID </th>
                         <th> Name </th>
                         <th style="width: 35%;"> Description </th>
+                        <th> Time </th>
                         <th> Status </th>
                         <th> action </th>
                     </tr>
@@ -58,6 +72,7 @@
                         <td>{{task.ID}}</td>
                         <td>{{task.name}}</td>
                         <td style="width: 35%"> <div style="width:100%; max-height:85px; overflow:auto">{{task.description}}</div></td>
+                        <td>{{ "%02d"|format(task.time // 3600) }} : {{ "%02d"|format(task.time // 60) }} : {{ "%02d"|format(task.time % 60) }}</td>
                         <td>{{task.status}}</td>
                         <td>
                             <button class="btn btn-warning btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#modalEdit{{task.ID}}" > Edit </button>
