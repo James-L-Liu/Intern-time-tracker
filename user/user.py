@@ -36,17 +36,19 @@ def update_user(user_id):
     if request.method == 'POST':
         user_number = request.form.get('user_id')
         user_name = request.form.get('user_name')
-
-        print(user_number)
-        print(user_name)
-        print(331)
         user = utilities.get_user(user_number)
-        print(user)
         user.name = request.form['update_username']
         user.email = request.form['update_email']
-        print(request.form['update_age'])
-        user.age = int(request.form['update_age'])
+
+        user.age = ''
+        if request.form['update_age'].isdigit():
+            user.age = int(request.form['update_age'])
+
+        print(user.password)
         user.password = request.form['update_password']
         flash('User has been updated successfully !')
+        print(331)
+        print(user.password)
+
 
     return redirect(url_for('user_bp.get_all_users'))

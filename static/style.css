@@ -67,5 +67,16 @@ input[type='submit']:hover {
     color: black;
 }
 
+.img {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
+
+#img myimage {
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+}
 
 

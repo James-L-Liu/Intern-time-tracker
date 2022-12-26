@@ -16,10 +16,16 @@ class AuthenticationException(Exception):
 class UnknownIdException(Exception):
     pass
 
+class WrongEmailException(Exception):
+    pass
+
 def add_user(user_name: str, email:str, age: int, password: str, repo: AbstractRepository):
     user = repo.get_user_by_name(user_name)
     if user is not None:
         raise NameNotUniqueException
+
+    if ('.' not in email) or ('@' not in email):
+        raise WrongEmailException
 
     password_hash = generate_password_hash(password)
     print(age)

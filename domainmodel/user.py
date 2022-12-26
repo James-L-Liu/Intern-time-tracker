@@ -45,6 +45,7 @@ class User(People):
 
     @age.setter
     def age(self, new_age: int):
+        self.__age = ''
         if isinstance(new_age, int) and new_age > 0:
             self.__age = new_age
 

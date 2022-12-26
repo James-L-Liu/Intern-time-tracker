@@ -36,14 +36,16 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <form action="{{url_for('user_bp.add_user')}}" method="POST" id="add_user_form">
+                        <form action="{{url_for('user_bp.add_user')}}" method="POST" id="add_user_form" name="add_form">
                           <div class="form-group">
                             <label for="user-name" class="col-form-label">Username: </label>
-                            <input type="text" class="form-control" id="user-name" name="username" required>
+                            <input type="text" class="form-control" id="user-name" name="username" required minlength="3" maxlength="30">
                           </div>
                           <div class="form-group">
                             <label for="email" class="col-form-label">Email: </label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" pattern="^[\w]{1,}[\w]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$"
+                                   class="form-control" id="email" name="email" required>
+
                           </div>
                             <div class="form-group">
                             <label for="age" class="col-form-label">Age: </label>
@@ -51,13 +53,18 @@
                           </div>
                             <div class="form-group">
                             <label for="password" class="col-form-label">Password: </label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+
                           </div>
                         </form>
                       </div>
+
+                        <div style="margin-left: 15px"><p id="showpassword" style="font-size: 12px"> </p> </div>
+
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" value="Submit" form="add_user_form"> Confirm </button>
+                        <button type="submit" class="btn btn-primary" value="Submit" form="add_user_form" id="submit_button" onclick="
+                        document.getElementById('showpassword').innerHTML = 'Your password must contain at least 8 digits, a digit, a lowercase letter and a uppercase letter !' "> Confirm </button>
                       </div>
                     </div>
                   </div>
@@ -82,7 +89,7 @@
 
                             <button class="btn btn-warning btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#modalEdit{{user.ID}}" > Edit{{user.ID}} </button>
 
-                            <a href="{{ url_for('user_bp.delete_user', user_id=user.ID) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this user?')">
+                            <a href="{{ url_for('user_bp.delete_user', user_id=user.ID) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete User({{user.ID}})?')">
                                 Delete </a>
                         </td>
                     </tr>
@@ -102,32 +109,35 @@
                             <label for="update_username" class="col-form-label" style="color: black">Username{{user.ID}} {{user.name}}: </label>
                               <input type="hidden" name="user_id" value="{{user.ID}}">
                               <input type="hidden" name="user_name" value="{{user.name}}">
-                            <input type="text" class="form-control" id="update_username" name="update_username">
+                            <input type="text" class="form-control" id="update_username" name="update_username" value="{{user.name}}" minlength="3" maxlength="30">
                           </div>
                           <div class="form-group">
                             <label for="update_email" class="col-form-label" style="color: black">Email: </label>
-                            <input type="email" class="form-control" id="update_email" name="update_email">
+                            <input type="email" pattern="^[\w]{1,}[\w]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$"
+                                   class="form-control" id="update_email" name="update_email" value="{{user.email}}">
                           </div>
                             <div class="form-group">
                             <label for="update_age" class="col-form-label" style="color: black">Age: </label>
-                            <input type="number" class="form-control" id="update_age" name="update_age">
+                            <input type="number" class="form-control" id="update_age" name="update_age" value="{{user.age}}">
                           </div>
                             <div class="form-group">
                             <label for="update_password" class="col-form-label" style="color: black">Password: </label>
-                            <input type="password" class="form-control" id="update_password" name="update_password">
+                            <input type="password" class="form-control" id="update_password" name="update_password" value="{{user.password}}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                           </div>
                         </form>
                       </div>
+
+                        <div style="margin-left: 15px"><p id="showRequirement" style="font-size: 12px"> </p> </div>
+
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" value="Submit" form="update_user_form{{user.ID}}"> Update </button>
+                        <button type="submit" class="btn btn-primary" value="Submit" form="update_user_form{{user.ID}}" onclick="
+                        document.getElementById('showRequirement').innerHTML = 'Your password must contain at least 8 digits, a digit, a lowercase letter and a uppercase letter !'"> Update </button>
                       </div>
                     </div>
                   </div>
 
                 </div>
-
-                    <script src="static/js/myown.js"></script>
                     {% endfor %}
                 </table>
 

@@ -52,13 +52,8 @@
             <br>
 
             <div class="form-field"><div style="color: white">{{ form.password.label }}</div> {{ form.password }}
-                {% if form.password.errors or password_error_message is not none %}
+                {% if form.password.errors %}
                     <ul class="errors" style="color: red">
-                        {% if password_error_message is not none %}
-                            <li>
-                                {{ password_error_message }}
-                            </li>
-                        {% endif %}
                         {% for error in form.password.errors %}
                             <li>{{ error }}</li>
                         {% endfor %}
